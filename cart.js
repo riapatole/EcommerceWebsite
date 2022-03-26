@@ -7,6 +7,7 @@ var firebaseConfig = {
     appId: "1:857935630313:web:d85bebddae1c16811c4578",
     measurementId: "G-W2M6BYYTYE"
   };
+
   
 
 function total(){
@@ -17,7 +18,7 @@ function total(){
             total+= parseInt(productsLocal[index].total);
         }
     }
-  
+    console.log(total);
     return total;
 }
 
@@ -38,13 +39,13 @@ function remove(id) {
         if(productsLocal[index].id==id) {
             var x=productsLocal[index].id;
             productsLocal.splice(index,1);
-            localStorage.setItem('cart',JSON.stringify(productsLocal));
+            localStorage.setItem("cart",JSON.stringify(productsLocal));
 
             total();
             for(let index2 =0; index2<con2.length;index2++) {
-                if(x== con2[index2]) {
+                if(x == con2[index2]) {
                     con2.splice(index2,1);
-                    localStorage.setItem('positions',JSON.stringify(con2));
+                localStorage.setItem("positions",JSON.stringify(con2));
                 } else{
 
                 }
@@ -88,7 +89,7 @@ function updateCart() {
 
                 productsLocal[index3].total=productsLocal[index3]
                 .price*productsLocal[index3].quantity
-                localStorage.setItem('cart',JSON.stringify(productsLocal));
+                localStorage.setItem("cart",JSON.stringify(productsLocal));
             } else{
 
             }
@@ -122,7 +123,7 @@ function updateCart() {
         <button onclick="clean()" class="yellow accent-4 waves-effect waves-light btn">Clean</button>
         </td>
         <td>
-        <buttom href="modall" class="moda;-trigger green accent-4 waves-effect waves-light btn">Buy</button>
+        <buttom href="modall" class="modal-trigger green accent-4 waves-effect waves-light btn">Buy</button>
         </td>
         </tr>
         `
@@ -137,7 +138,7 @@ function reduceAmount(id) {
             if(productsLocal[index].quantity>1) {
                 productsLocal[index].quantity=parseInt(productsLocal[index]
                     .quantity)-1;
-                localStorage.setItem=("cart",JSON.stringify(productsLocal));
+                localStorage.setItem("cart",JSON.stringify(productsLocal));
             updateCart();
         } else {
 
@@ -155,9 +156,10 @@ function addAmount(id) {
             if(productsLocal[index].quantity>0) {
                 productsLocal[index].quantity=parseInt(productsLocal[index]
                     .quantity)+1;
-                localStorage.setItem=("cart",JSON.stringify(productsLocal));
-            updateCart();
+                localStorage.setItem("cart",JSON.stringify(productsLocal));
+                updateCart();
         } else {
+            
 
         }
         } else {
@@ -178,14 +180,14 @@ function addAmount(id) {
         <td><img style="width: 5rem;" src="${productsLocal[index].img}"></td>
         <td>${productsLocal[index].name}</td>
         <td>
-        <button class="waves-effect waves-light btn purple darken-4" onclick="reduceAmount(${productsLocal[index].id})">-</button></td>
-        <input style="width:2rem;" id=${productsLocal[index].id}"value="${productsLocal[index].quantity}" disabled>
+        <button class="waves-effect waves-light btn purple darken-4" onclick="reduceAmount(${productsLocal[index].id})">-</button>
+        <input style="width:2rem;" id="${productsLocal[index].id}"value="${productsLocal[index].quantity}" disabled>
         <button class="waves-effect waves-light btn purple darken-4" onclick="addAmount(${productsLocal[index].id})">+</button></td>
-        <td>${productsLocal[index].price*productsLocal[index].quantity}</td>
+        <td>$ ${productsLocal[index].price*productsLocal[index].quantity}</td>
         </tr>     
        `;
        productsLocal[index].total=productsLocal[index].price*productsLocal[index].quantity
-       localStorage.setItem('cart',JSON.stringify(productsLocal));
+       localStorage.setItem("cart",JSON.stringify(productsLocal));
  
     }
 
